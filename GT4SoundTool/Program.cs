@@ -198,7 +198,8 @@ public class Program
                     int pan = (int)Normalize(splitChunk.Pan, 0, 128, -500, 500);
                     sf2.AddInstrumentGenerator(SF2Generator.Pan, new SF2GeneratorAmount { Amount = (short)pan });
 
-                    //sf2.AddInstrumentGenerator(SF2Generator.CoarseTune, new SF2GeneratorAmount { Amount = (short)(splitChunk.UnkPitch)});
+                    // the multiplier here was brute-forced, likely not 100% accurate
+                    sf2.AddInstrumentGenerator(SF2Generator.FineTune, new SF2GeneratorAmount { Amount = (short)(splitChunk.UnkPitch * 6.5)});
 
                     if (prog.CountOrFlag == 0xFF)
                         sf2.AddInstrumentGenerator(SF2Generator.KeyRange, new SF2GeneratorAmount { LowByte = (byte)(prog.StartNoteRange + k), HighByte = (byte)(prog.StartNoteRange + k) });
